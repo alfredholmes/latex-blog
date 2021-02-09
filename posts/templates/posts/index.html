@@ -1,0 +1,7 @@
+{% if post_list %}
+	<ul>
+	{% for post in post_list %}
+		<li><a href="{% url 'post' post.slug %}">{{post.title}}</a></li>
+	{% endfor %}
+	</ul>
+{% endif%}
