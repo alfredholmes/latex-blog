@@ -1,3 +1,8 @@
+html {
+	font-size: 16px;
+	line-height: 1.6;
+}
+
 #header .links li {
 	padding-right: 10px;
 	display: inline;
@@ -11,7 +16,7 @@
 	border-top: 1px solid grey;
 	border-bottom: 1px solid grey;
 }
-@media only screen and (min-width: 490px){
+@media only screen and (min-width: 600px){
 #header div#social{
 	float: right;
 	width: 250px;
@@ -19,11 +24,34 @@
 	padding-left: 29px;
 }
 }
-body{
-
+@media only screen and (max-width: 980px){
+.links{
+	display: none;
 }
-div#main{
-	text-align: justify;
+#header div#title h1{
+	display: none;
+	font-size: 52px;
+	text-align: center;
+}
+#header div#title{
+	border-bottom: 1px solid grey;
+	margin: 0;
+	padding: 5px;
+}
+#header div#title a#mobile_nav{
+	text-decoration: None;
+}
+}
+
+#header div#title p{
+	font-size: 28px;
+}
+}
+@media only screen and (min-width: 980px){
+
+#header div#title a#mobile_nav{
+	display: none;
+}
 }
 @media only screen and (max-width: 1200px){
 div#sidebar{
@@ -45,6 +73,7 @@ div#main{
 	padding-bottom: 20px;
 	margin-top: 0;
 	padding-top: 10px;
+	text-align: justify;
 }
 div#container {
 	margin: 0 auto;
