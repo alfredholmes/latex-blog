@@ -1,19 +1,39 @@
-#header #links li {
+#header .links li {
 	padding-right: 10px;
 	display: inline;
 }
-#header #links ul {
+#header .links ul {
 	padding-left: 0;
 	margin-left: 0;
 	list-style: none;
 }
-#header div#links {
+#header div.links {
 	border-top: 1px solid grey;
 	border-bottom: 1px solid grey;
+}
+@media only screen and (min-width: 490px){
+#header div#social{
+	float: right;
+	width: 250px;
+	border-left: 1px solid grey;
+	padding-left: 29px;
+}
 }
 body{
 
 }
+div#main{
+	text-align: justify;
+}
+@media only screen and (max-width: 1200px){
+div#sidebar{
+	display: none;
+}
+div#main{
+	padding: 5px;
+}
+}
+@media only screen and (min-width: 1200px){
 div#pagecontent{
 
 	border-bottom: 1px solid grey;
@@ -21,6 +41,10 @@ div#pagecontent{
 div#main{
 	width: 900px; 
 	border-right: 1px solid grey;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	margin-top: 0;
+	padding-top: 10px;
 }
 div#container {
 	margin: 0 auto;
@@ -31,4 +55,5 @@ div#sidebar {
 	margin-left: 50px;
 	padding-left: 10px;
 	float: right;
+}
 }
