@@ -1,7 +1,15 @@
-{% if post_list %}
-	<ul>
-	{% for post in post_list %}
-		<li><a href="{% url 'post' post.slug %}">{{post.title}}</a>{{post.publication_date}}</li>
-	{% endfor %}
-	</ul>
-{% endif%}
+{% extends 'posts/base.html' %}
+
+{% block head %}
+<title>Alfred Holmes - Recent Posts</title>
+{% endblock %}
+
+{% block main_content %}                                                                  
+            <h2>Recent Posts</h2>
+            {% for post in post_list %}
+                <h3><a href='{% url 'post' post.slug %}'>{{post.title}}</a></h3>
+                <p>{{post.publication_date.date}}</p>
+                <p>{{post.abstract}}</p>
+                <p><a href='{% url 'post' post.slug %}'>Read More</a></p>
+            {% endfor %}
+{% endblock %}                                                                  

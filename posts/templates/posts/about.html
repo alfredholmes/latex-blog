@@ -1,0 +1,9 @@
+{% extends 'posts/base.html'%}
+
+
+{% block main_content %}
+    {% for section in sections %}
+        <h2>{{section.title}}</h2>
+        <p>{{section.text | safe}}</p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% load static %}
+<html>
+    <head>
+        {% block head %}
+        {% endblock %}
+        <meta charset='utf-8' />
+        <link href="{%  static 'blog/base.css' %}" type='text/css' rel='stylesheet' /> 
+        <link href="{%  static 'blog/favicon.ico' %}" type='image/png' rel='shortcut icon' /> 
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <div id="title">
+                    <p><a href="{% url 'index' %}" id="mobile_nav">&#8592;Back to Posts</a></p>
+                    <h1>Blog Title</h1>
+                </div>
+                <div class="links" id="social">
+                    <ul>
+                        <li><a href="#">Example Link</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="links">
+                    <ul>
+                        <li><a href="{% url 'index' %}">Posts</a></li>
+                        <li><a href="{% url 'collections' %}">Collections</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="pagecontent">
+            <div id="sidebar">
+                {% block sidebar %}
+                {% endblock %}
+            </div>
+            <div id="main">  
+                                                                  
+            {% block main_content %}
+            {% endblock  %}
+
+            </div>
+</body>
+</html>

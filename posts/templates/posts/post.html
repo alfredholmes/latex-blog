@@ -1,3 +1,14 @@
-{% if post %}
-{{post.html | safe}}
-{% endif %}
+{% extends 'posts/base.html' %}
+
+{% block head%}
+    {% if header %}
+        {{header | safe}}
+    {% endif %}
+{% endblock %}
+
+
+{% block main_content %}                                                                  
+    {% if body %}
+        {{body | safe}}
+    {% endif %}
+{% endblock %}

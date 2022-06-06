@@ -25,7 +25,7 @@ SECRET_KEY = '(yk&(%%86^p4^s&^g3!@6&5_sy(a3=r+%(1+odoex%2$_u@2(*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '192.168.0.7']
 
 
 # Application definition
@@ -118,7 +118,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 import os
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
