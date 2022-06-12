@@ -5,7 +5,7 @@ import os, bs4
 
 class Category(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     class Meta:
         verbose_name_plural = 'categories'
 
