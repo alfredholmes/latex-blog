@@ -31,8 +31,9 @@ def collections(request):
     collections = Category.objects.all()
     posts = {}
     for collection in collections: 
-        posts[collection.slug] = collecion.posts
-    return render(request, 'post/collections.html', {'collections': collections})
+        posts[collection] = collection.post_set.all()
+
+    return render(request, 'posts/collections.html', {'collections': posts})
 
 
 def collection(request, collection_slug):
@@ -43,7 +44,7 @@ def collection(request, collection_slug):
 
     except Collection.DoesNotExist:
        raise Http404('Collection does not exit') 
-    return render(request, 'post/collections.html', {'collections': collections})
+    return render(request, 'posts/collection.html', {'collections': collections})
 
 def about(request):
     sections = AboutSection.objects.all()

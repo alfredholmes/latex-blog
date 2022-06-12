@@ -16,6 +16,10 @@ html {
 	border-top: 1px solid grey;
 	border-bottom: 1px solid grey;
 }
+div.indent{
+    padding-left: 40px;
+
+}
 @media only screen and (min-width: 600px){
 #header div#social{
 	float: right;

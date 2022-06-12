@@ -1,0 +1,22 @@
+{% extends 'posts/base.html' %}
+
+{% block head%}
+    {% if header %}
+        {{header | safe}}
+    {% endif %}
+{% endblock %}
+
+
+{% block main_content %}                                                                  
+    {% for collection, posts in collections.items %}
+        <h2>{{collection.title}}</h2>
+        <div class='indent'>
+        {% for post in posts %}
+            <p>{{post.publication_date.date}}</p>
+            <h3><a href='{% url 'post' post.slug %}'>{{post.title}}</a></h3>
+            <p>{{post.abstract}}</p>
+        {% endfor%}
+        </div>
+        <a href='{% url 'collection' collection.slug  %}'>More in {{collection.title}}</a>
+    {% endfor %}
+{% endblock %}

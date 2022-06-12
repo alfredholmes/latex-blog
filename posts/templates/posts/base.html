@@ -3,6 +3,7 @@
     <head>
         {% block head %}
         {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset='utf-8' />
         <link href="{%  static 'blog/base.css' %}" type='text/css' rel='stylesheet' /> 
         <link href="{%  static 'blog/favicon.ico' %}" type='image/png' rel='shortcut icon' /> 
@@ -22,9 +23,9 @@
                 </div>
                 <div class="links">
                     <ul>
-                        <li><a href="{% url 'index' %}">Posts</a></li>
-                        <li><a href="{% url 'collections' %}">Collections</a></li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'collections' %}">Posts</a></li>
                     </ul>
                 </div>
             </div>
