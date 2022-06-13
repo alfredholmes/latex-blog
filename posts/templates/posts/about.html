@@ -1,9 +1,21 @@
 {% extends 'posts/base.html'%}
 
 
+
+
+{% block head %}
+<title>About</title>
+{% endblock %}
+
+
+{% block mobilenav %}
+<p><a href="{% url 'index' %}" id="mobile_nav">&#8592;Back to Posts</a></p>
+{% endblock%}
+
 {% block main_content %}
     {% for section in sections %}
         <h2>{{section.title}}</h2>
         <p>{{section.text | safe}}</p>
     {% endfor %}
 {% endblock %}
+

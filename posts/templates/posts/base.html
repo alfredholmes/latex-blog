@@ -12,15 +12,21 @@
         <div id="container">
             <div id="header">
                 <div id="title">
-                    <p><a href="{% url 'index' %}" id="mobile_nav">&#8592;Back to Posts</a></p>
-                    <h1>Blog Title</h1>
+                    {% block mobilenav %} 
+                    {% endblock %}
+                    {% for title in titles %}
+                        <h{{title.size}}>{{ title.text}}</h{{title.size}}>
+                    {% endfor %}
                 </div>
+                {% if social|length %}
                 <div class="links" id="social">
                     <ul>
-                        <li><a href="#">Example Link</a></li>
-                        
+                       {% for social in socials %}
+                            <li><a href='{{social.url}}', target='_blank'>{{social.name}}</a></li>
+                       {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
                 <div class="links">
                     <ul>
                         <li><a href="{% url 'index' %}">Home</a></li>
@@ -38,7 +44,16 @@
                                                                   
             {% block main_content %}
             {% endblock  %}
-
+                {% if socials|length > 0 %}
+                <div id="mobilesocial">
+                    <h3>Other places</h3>
+                    <ul>
+                        {% for social in socials %}
+                            <li><a href='{{social.url}}', target='_blank'>{{social.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </div>
             </div>
 </body>
 </html>

@@ -1,11 +1,21 @@
 from django.shortcuts import render
 
-from .models import Post, AboutSection, Category
+from .models import Post, AboutSection, Category, TitleElement, SocialLink
+
+def get_title_data():
+    headers = TitleElement.objects.all()
+    socials = SocialLink.objects.all()
+    return {'titles': headers, 'socials': socials}
+    
+
 
 def index(request):
-    return render(request, 'posts/index.html', {'post_list': Post.objects.all()})
+    data = get_title_data()
+    data['post_list'] = Post.objects.all()
+    return render(request, 'posts/index.html', data)
 
 def post(request, post_slug):
+    data = get_title_data()
     try:
         post = Post.objects.get(slug=post_slug)
         content = post.renderedpage_set.all()[0] 
@@ -13,10 +23,15 @@ def post(request, post_slug):
         body = content.body
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
-    return render(request, 'posts/post.html', {'post': post, 'header': header, 'body': body})
+
+    data['post'] = post
+    data['header'] = header
+    data['body'] = body
+    return render(request, 'posts/post.html', data)
 
 
 def post_page(request, post_slug, html_slug):
+    data = get_title_data()
     try:
         post = Post.objects.get(slug=post_slug)
         content = post.renderedpage_set.filter(name='.'.join(html_slug.split('.')[:-1]))[0] 
@@ -24,29 +39,42 @@ def post_page(request, post_slug, html_slug):
         body = content.body
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
-    return render(request, 'posts/post.html', {'post': post, 'header': header, 'body': body})
+
+    data['post'] = post
+    data['header'] = header
+    data['body'] = body
+
+    return render(request, 'posts/post.html', data)
 
 def collections(request):
     #get collections and <=5 most recent posts from each, order by recently updated
+    data = get_title_data() 
     collections = Category.objects.all()
     posts = {}
     for collection in collections: 
-        posts[collection] = collection.post_set.all()
+        posts[collection] = collection.post_set.all().reverse()[:5]
 
-    return render(request, 'posts/collections.html', {'collections': posts})
+    data['collections'] = posts
+
+    return render(request, 'posts/collections.html', data)
 
 
 def collection(request, collection_slug):
+    data = get_title_data()
     try:
         collection = Category.objects.get(slug = collection_slug) 
-        title = collection.title
-        posts = collection.posts 
+        posts = {collection: collection.post_set.all()} 
 
     except Collection.DoesNotExist:
-       raise Http404('Collection does not exit') 
-    return render(request, 'posts/collection.html', {'collections': collections})
+        raise Http404('Collection does not exit') 
+    
+    data['collections'] = posts
+
+    return render(request, 'posts/collections.html', data)
 
 def about(request):
+    data = get_title_data()
     sections = AboutSection.objects.all()
-    return render(request, 'posts/about.html', {'sections': sections})
+    data['sections'] = sections
+    return render(request, 'posts/about.html', data)
     

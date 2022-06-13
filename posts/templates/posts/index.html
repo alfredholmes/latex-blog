@@ -1,7 +1,17 @@
 {% extends 'posts/base.html' %}
 
+{% block mobilenav %}
+<p><a href="{% url 'index' %}" id="mobile_nav">About</a></p>
+<p><a href="{% url 'index' %}" id="mobile_nav">Posts by Category</a></p>
+{% endblock%}
+
+
 {% block head %}
-<title>Alfred Holmes - Recent Posts</title>
+{% if titles %}
+<title>{{titles.0.text}} - Recent Posts</title>
+{% else %}
+<title>Recent Posts</title>
+{% endif %}
 {% endblock %}
 
 {% block main_content %}                                                                  

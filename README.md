@@ -1,15 +1,15 @@
 # LaTeX Blog
-If you find this project useful, consider supporting me on [Ko-fi](https://ko-fi.com/holmes).
+If you find this project useful, please consider supporting me on [Ko-fi](https://ko-fi.com/holmes).
 
-Blogging website written in Django the renders LaTeX blog posts to html. Posts are written in LaTeX and rendered using make4hti to HTML which is then used to display the posts. Is the code that is used on [my blog](https://alfredholmes.uk).
+Blogging website written in Django the renders LaTeX blog posts to html. Posts are written in LaTeX and rendered using make4ht to HTML which is then used to display the posts. Is the code that is used on [my blog](https://alfredholmes.uk).
 
 To run, it is expected that the computer is running Linux with make4ht installed. See the post [How to blog with Latex](https://alfredholmes.uk/posts/how-to-latex-blog) for detailed instructions.
 
 Quick how to run (Linux or macOS), assuming make4ht is installed and can be run in the command line with `make4ht`:
 
 ```
-git clone https://github.com/alfredholmes/latex-blog
-cd latex-blog
+git clone https://github.com/alfredholmes/django-latex-blog
+cd django-latex-blog
 
 virtualenv venv
 source venv/bin/activate
