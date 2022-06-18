@@ -1,4 +1,7 @@
-# Byte-compiled / optimized / DLL files
+#The settings file -
+blog/settings.py
+
+#Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
