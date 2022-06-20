@@ -46,6 +46,6 @@ wget --mirror --convert-links localhost:8000
 ```
 this will create a static HTML version of the site in the folder `static-html`. This can then be uplocaded to any static HTML hosting that you have, for example a department website. The advantage to this is that this hosting is often cheap or even free.
 
-The other option is to run the site on a cloud server that runs django. This is a bit difficult to set up, but details can be found [here](https://alfredholmes.uk/posts/how-to-latex-blog). Annoyingly you'll most likely have to manage your own server because the server needs to have LaTeX installed. If you find a hosting site that allows managed Django with the ability to install command line applications, please let me know.
+The other option is to run the site on a cloud server that runs django. This is a bit difficult to set up. Annoyingly you'll most likely have to manage your own server because the server needs to have LaTeX installed. If you find a hosting site that allows managed Django with the ability to install command line applications, please let me know.
 
 
