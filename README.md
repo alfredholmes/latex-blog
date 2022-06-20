@@ -31,7 +31,7 @@ and set the `SECRET_KEY` variable in `blog/settings.py` equal to the output of t
 ...
 (venv) ./manage.py runserver
 ```
-If you navigate to `localhost:8000` you should see an empty version of the site running. Navigating to `loaclhost:8000/admin` will and logging in with the account details you made will allow you to edit the site.
+If you navigate to `localhost:8000` you should see an empty version of the site running. Navigating to `loaclhost:8000/admin` and logging in with the account details you made will allow you to edit the site.
 
 
 
