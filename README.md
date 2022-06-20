@@ -3,7 +3,7 @@ If you find this project useful, please consider supporting me on [Ko-fi](https:
 
 Blogging website written in Django the renders LaTeX blog posts to html. Posts are written in LaTeX and rendered using make4ht to HTML which is then used to display the posts. Is the code that is used on [my blog](https://alfredholmes.uk).
 
-To run, it is expected that the computer is running Linux with make4ht installed. See the post [How to blog with Latex](https://alfredholmes.uk/posts/how-to-latex-blog) for detailed instructions.
+To run, it is expected that the computer is running Linux with make4ht installed.
 
 Quick how to run (Linux or macOS), assuming make4ht is installed and can be run in the command line with `make4ht`:
 
@@ -11,14 +11,29 @@ Quick how to run (Linux or macOS), assuming make4ht is installed and can be run 
 git clone https://github.com/alfredholmes/django-latex-blog
 cd django-latex-blog
 
+
+cp blog/settings_local_template.py blog/settings.py
+
 virtualenv venv
 source venv/bin/activate
 (venv) pip install -r requirements.txt
 
-(venv) python manage.py
+```
+Now create your own a secret key using the command
 
 ```
-Then you should see the site if you navigate to `localhost:8000`.
+(venv) python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+and set the `SECRET_KEY` variable in `blog/settings.py` equal to the output of this. Now run
+
+```
+(venv) ./manage.py createsuperuser
+...
+(venv) ./manage.py runserver
+```
+If you navigate to `localhost:8000` you should see an empty version of the site running. Navigating to `loaclhost:8000/admin` will and logging in with the account details you made will allow you to edit the site.
+
+
 
 To run on Windows, or with different HTML rendering software, you'll need to change the models in posts/models.py so that make4ht or you chosen renderer can be run. If you have some other software that takes a file and renders HTML then the code could be easily modified to render in this way instead of using LaTeX.
 
