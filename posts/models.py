@@ -20,6 +20,7 @@ default_tex = """\\documentclass{article}
 \\usepackage[colorlinks]{hyperref}
 \\usepackage[capitalize,nameinlink,noabbrev]{cleveref}
 \\usepackage[nottoc,notlot,notlof]{tocbibind}
+\\usepackage{graphicx}
 
 
 \\title{Default}
@@ -82,11 +83,12 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category, blank=True)
     abstract = models.TextField()
 
-
     def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
+        #first save the images etc
+        super().save(*args, **kwargs)
         #render_html
         #check to see if there is already a post with this slug
         if len(Post.objects.filter(slug=slugify(self.title))) > 0 and self.slug == "":
@@ -109,17 +111,18 @@ class Post(models.Model):
         with open(self.slug + '.tex', 'w') as f:
             f.write(self.latex)
         
-        os.system('make4ht ' + self.slug + '.tex "html,mathjax"')
+        os.system('make4ht ' + self.slug + '.tex "pic-m,svg"')
 
         os.system('pdflatex ' + self.slug)
 
 
-        super().save(*args, **kwargs)
         #deal with generated css and images 
-        images = [filename for filename in os.listdir() if self.slug in filename and ('.svg' in filename or '.css' in filename)]
+        filetypes = ['jpg', 'svg', 'css', 'png']
+        images = [filename for filename in os.listdir() if filename.split('.')[-1].lower() in filetypes]
         urls = {}
         for image in images:
-            with open(image) as f:
+            #TODO: check to see if this already exists...
+            with open(image, 'rb') as f:
                 django_file = File(f)
                 media = PostMedium(post=self, media=django_file)
                 media.save()
