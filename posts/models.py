@@ -88,7 +88,6 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         #first save the images etc
-        super().save(*args, **kwargs)
         #render_html
         #check to see if there is already a post with this slug
         if len(Post.objects.filter(slug=slugify(self.title))) > 0 and self.slug == "":
@@ -113,20 +112,19 @@ class Post(models.Model):
         
         os.system('make4ht ' + self.slug + '.tex "pic-m,svg"')
 
-        os.system('pdflatex ' + self.slug)
-
+        os.system('pdflatex -interaction=nonstopmode ' + self.slug)
+        
+        super().save(*args, **kwargs)
 
         #deal with generated css and images 
         filetypes = ['jpg', 'svg', 'css', 'png']
         images = [filename for filename in os.listdir() if filename.split('.')[-1].lower() in filetypes]
         urls = {}
         for image in images:
-            #TODO: check to see if this already exists...
-            with open(image, 'rb') as f:
-                django_file = File(f)
-                media = PostMedium(post=self, media=django_file)
-                media.save()
-                urls[image] = media.media.url
+            media = PostMedium(post=self)
+            media.media.name =  f'posts/{self.slug}/{image}'
+            media.save()
+            urls[image] = media.media.url
         #load html into the database
         html_files = [filename for filename in os.listdir() if self.slug in filename and '.html' in filename]
         for html_file in html_files:
