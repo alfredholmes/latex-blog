@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.core.files import File
 import os, bs4
 
+from django.conf import settings
 
 default_tex = """\\documentclass{article}
 %\\documentclass{book}
@@ -95,8 +96,10 @@ class Post(models.Model):
             self.slug = slugify(self.title + ' ' + str(hits + 1))
         elif self.slug == "":
             self.slug = slugify(self.title)
+
+
         
-        path = 'media/posts/' + self.slug
+        path = os.path.join(settings.MEDIA_ROOT, f'posts/{self.slug}')
         
         #get the directory of the files - needs to work when there are no additional files.
         original_dir = os.getcwd()                 
