@@ -3,6 +3,8 @@ from django.utils.text import slugify
 from django.core.files import File
 import os, bs4
 
+import shutil
+
 from django.conf import settings
 
 default_tex = """\\documentclass{article}
@@ -87,6 +89,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def delete(self, *args, **kwargs):
+        path = os.path.join(settings.MEDIA_ROOT, f'posts/{self.slug}')
+        shutil.rmtree(path)
+        print(path)
+
     def save(self, *args, **kwargs):
         #first save the images etc
         #render_html
@@ -155,6 +162,9 @@ class Post(models.Model):
                 page = RenderedPage(post=self, name=slug, head=head, body=body)
             page.save()
         os.chdir(original_dir)
+
+
+
 
 
 #model to hold the rendered html, keeping the latex page structure

@@ -10,6 +10,11 @@ class PostMediumInline(admin.StackedInline):
 class PostAdmin(admin.ModelAdmin):
     inlines = [PostMediumInline]
 
+    def delete_queryset(self, request, queryset):
+        for post in queryset:
+            post.delete()
+            
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostMedium)
 admin.site.register(RenderedPage)
