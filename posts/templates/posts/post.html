@@ -1,5 +1,9 @@
 {% extends 'posts/base.html' %}
 
+{% block mobilenav %}
+<p><a href="{% url 'index' %}" id="mobile_nav">&#8592;Back to Posts</a></p>
+{% endblock%}
+
 {% block head%}
     {% if header %}
         {{header | safe}}
