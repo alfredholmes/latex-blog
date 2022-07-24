@@ -12,7 +12,7 @@ def get_title_data():
 
 def index(request):
     data = get_title_data()
-    data['post_list'] = Post.objects.all().order_by('publication_date')
+    data['post_list'] = Post.objects.all().order_by('-publication_date')
     return render(request, 'posts/index.html', data)
 
 def post(request, post_slug):
