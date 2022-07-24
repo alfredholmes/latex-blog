@@ -90,9 +90,9 @@ class Post(models.Model):
         return self.title
 
     def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
         path = os.path.join(settings.MEDIA_ROOT, f'posts/{self.slug}')
         shutil.rmtree(path)
-        print(path)
 
     def save(self, *args, **kwargs):
         #first save the images etc
