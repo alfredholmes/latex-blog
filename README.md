@@ -1,5 +1,5 @@
 # LaTeX Blog
-If you find this project useful, please consider supporting me on [Ko-fi](https://ko-fi.com/holmes).
+
 
 Blogging website written in Django the renders LaTeX blog posts to html. Posts are written in LaTeX and rendered using make4ht to HTML which is then used to display the posts. Is the code that is used on [my blog](https://alfredholmes.uk).
 
