@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 
-from .models import Post, AboutSection, Category, TitleElement, SocialLink
+from .models import Post, PostMedium, AboutSection, Category, TitleElement, SocialLink
 
 def get_title_data():
     headers = TitleElement.objects.all()
@@ -26,6 +26,10 @@ def post(request, post_slug):
         data['post'] = post
         data['header'] = header
         data['body'] = body
+        data['share_pdf'] = post.share_pdf
+        for file in PostMedium.objects.filter(post=post):
+            if file.media.name.split('.')[-1] == 'pdf':
+                data['pdf'] = file
         return render(request, 'posts/post.html', data)
     except Post.DoesNotExist:
         raise Http404("Post does not exist")

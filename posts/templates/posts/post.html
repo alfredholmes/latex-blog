@@ -12,6 +12,9 @@
 
 
 {% block main_content %}                                                                  
+    {% if share_pdf is True %}
+    <a href="{{ pdf.media.url }}" target='_blank'>Download PDF</a>
+    {% endif %}
     {% if body %}
         {{body | safe}}
     {% endif %}

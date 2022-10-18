@@ -85,6 +85,7 @@ class Post(models.Model):
     latex = models.TextField(default=default_tex)
     categories = models.ManyToManyField(Category, blank=True)
     abstract = models.TextField()
+    share_pdf = models.BooleanField()
 
     def __str__(self):
         return self.title
@@ -120,19 +121,28 @@ class Post(models.Model):
         with open(self.slug + '.tex', 'w') as f:
             f.write(self.latex)
         
-        os.system('make4ht ' + self.slug + '.tex "pic-m,svg"')
+        os.system('make4ht ' + self.slug + '.tex "mathml,mathjax"')
 
+        os.system('pdflatex -interaction=nonstopmode ' + self.slug)
         os.system('pdflatex -interaction=nonstopmode ' + self.slug)
         
         super().save(*args, **kwargs)
 
         #deal with generated css and images 
-        filetypes = ['jpg', 'svg', 'css', 'png']
+        filetypes = ['jpg', 'svg', 'css', 'png', 'pdf']
         images = [filename for filename in os.listdir() if filename.split('.')[-1].lower() in filetypes]
         urls = {}
+        saved_files = PostMedium.objects.filter(post=self)
+        saved_file_names = [f.media.name for f in saved_files]
         for image in images:
+            name = f'posts/{self.slug}/{image}'
             media = PostMedium(post=self)
-            media.media.name =  f'posts/{self.slug}/{image}'
+            #check if this already exists
+            if name in saved_file_names: 
+                file = saved_files[saved_file_names.index(name)]
+                urls[image] = file.media.url
+                continue
+            media.media.name = name
             media.save()
             urls[image] = media.media.url
         #load html into the database
