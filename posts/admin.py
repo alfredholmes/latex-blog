@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, PostMedium, RenderedPage, AboutSection, Category, TitleElement, SocialLink
+from .models import Post, PostMedium, RenderedPage, AboutSection, Category, TitleElement, SocialLink, HeadElement
 
 
 
@@ -22,3 +22,4 @@ admin.site.register(AboutSection)
 admin.site.register(Category)
 admin.site.register(TitleElement)
 admin.site.register(SocialLink)
+admin.site.register(HeadElement)

@@ -7,6 +7,9 @@
         <meta charset='utf-8' />
         <link href="{%  static 'blog/base.css' %}" type='text/css' rel='stylesheet' /> 
         <link href="{%  static 'blog/favicon.ico' %}" type='image/png' rel='shortcut icon' /> 
+        {% for h in head_elements %}
+            {{h.html | safe}}
+        {% endfor%}
     </head>
     <body>
         <div id="container">

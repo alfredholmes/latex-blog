@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import Http404
 
-from .models import Post, PostMedium, AboutSection, Category, TitleElement, SocialLink
+from .models import Post, PostMedium, AboutSection, Category, TitleElement, SocialLink, HeadElement
 
 def get_title_data():
     headers = TitleElement.objects.all()
     socials = SocialLink.objects.all()
-    return {'titles': headers, 'socials': socials}
+    head_elements = HeadElement.objects.all()
+    return {'titles': headers, 'socials': socials, 'head_elements': head_elements}
     
 
 
@@ -85,7 +86,7 @@ def about(request):
 
     data = get_title_data()
     try:
-        sections = AboutSection.objects.all()
+        sections = AboutSection.objects.all().order_by('order_int')
         data['sections'] = sections
         return render(request, 'posts/about.html', data)
     except:

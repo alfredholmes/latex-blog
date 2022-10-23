@@ -48,14 +48,28 @@ This is the default post
 \\end{document}
 """
 
+
 class TitleElement(models.Model):
+    """
+        Text to be rendered at the top of every page, for example the name of the blog
+    """
     text = models.CharField(max_length=200)
     size = models.IntegerField()
 
     def __str__(self):
         return self.text
 
+
+class HeadElement(models.Model):
+    """
+        HTML to be added into the <head></head> at the top of the page, for example google analytics
+    """
+    html = models.TextField()
+
 class SocialLink(models.Model):
+    """
+        Links which appear in some pages, eg about or at the bottom of the page in the mobile view.
+    """
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
 
@@ -63,6 +77,9 @@ class SocialLink(models.Model):
         return self.name
 
 class Category(models.Model):
+    """
+        Category for the posts. Posts are categorised in the /collections page
+    """
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     class Meta:
@@ -74,11 +91,20 @@ class Category(models.Model):
 
 
 class AboutSection(models.Model):
+    """
+        Text to be added to the about section
+
+        TODO: Allow images etc.
+    """
     title = models.CharField(max_length=200)
     text = models.TextField()
+    order_int = models.IntegerField()
 
 
 class Post(models.Model):
+    """
+        Post objects
+    """
     title = models.CharField(max_length=200)
     publication_date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(editable=False, unique=True)
@@ -177,8 +203,10 @@ class Post(models.Model):
 
 
 
-#model to hold the rendered html, keeping the latex page structure
 class RenderedPage(models.Model):
+    """
+        Model to hold the rendered html of a post.
+    """
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     name = models.SlugField() #name of the html file - used for links
     head = models.TextField()  #to link the stylesheets etc and pages
@@ -190,8 +218,10 @@ class RenderedPage(models.Model):
 def post_file_path(instance, filename):
     return 'posts/' + instance.post.slug + '/' + filename
 
-#model to handle post dependencies, for example stylesheets and images
 class  PostMedium(models.Model):
+    """
+        Model to handle post dependencies, for example stylesheets and images
+    """
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     media = models.FileField(upload_to=post_file_path)
     class Meta:
