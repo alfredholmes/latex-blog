@@ -32,7 +32,7 @@ and set the `SECRET_KEY` variable in `blog/settings.py` equal to the output of t
 (venv) ./manage.py createsuperuser
 ```
 and fill in some details for admin account to access the admin part of the site. Now run
-...
+```
 (venv) ./manage.py runserver
 ```
 If you navigate to `localhost:8000` you should see an empty version of the site running. Navigating to `loaclhost:8000/admin` and logging in with the account details you made will allow you to edit the site. For example, to start you may want to add a title element, which will add a heading to the site. 
